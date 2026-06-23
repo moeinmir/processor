@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 import java.math.BigDecimal
 
 interface AdCrudOperationService{
-    fun getContractsByEventDto(eventDto: EventDto): Contract.Companion.ContractDto?;
+    fun getContractsByEventDto(eventDto: EventDto): Contract??;
     fun saveContract(contract: Contract): Contract.Companion.ContractDto
     fun getContractById(id: Long): Contract.Companion.ContractDto;
     fun createMissingEntitiesOfEvents(eventDto: EventDto): Contract.Companion.ContractDto;
@@ -23,7 +23,7 @@ class AdCrudOperationServiceImpl(
     private val messageService: MessageService
 ) : AdCrudOperationService {
 
-    override fun getContractsByEventDto(eventDto: EventDto): Contract.Companion.ContractDto? {
+    override fun getContractsByEventDto(eventDto: EventDto): Contract? {
         return contractRepository
             .findByPublisher_ClientCodeAndAdvertizer_ClientCodeAndAdvertiserExpenseTypeAndPublisherIncomeTypeAndAdvertiserExpenseUnitAndPublisherIncomeUnit(
                 eventDto.publisherId!!,
@@ -32,8 +32,7 @@ class AdCrudOperationServiceImpl(
                 eventDto.publisherIncomeType!!,
                 eventDto.advertiserExpense!!,
                 eventDto.publisherIncome!!
-            )
-            ?.getContractDto();
+            );
     }
 
     override fun saveContract(contract: Contract): Contract.Companion.ContractDto {
