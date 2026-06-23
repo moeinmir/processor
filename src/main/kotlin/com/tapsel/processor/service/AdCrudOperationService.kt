@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 import java.math.BigDecimal
 
 interface AdCrudOperationService{
-    fun getContractsByEventDto(eventDto: EventDto): Contract??;
+    fun getContractsByEventDto(eventDto: EventDto): Contract?;
     fun saveContract(contract: Contract): Contract.Companion.ContractDto
     fun getContractById(id: Long): Contract.Companion.ContractDto;
     fun createMissingEntitiesOfEvents(eventDto: EventDto): Contract.Companion.ContractDto;
