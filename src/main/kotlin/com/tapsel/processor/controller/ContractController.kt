@@ -20,7 +20,7 @@ class ContractController(
 ){
     @GetMapping("")
     fun getContractById(@RequestBody request: EventDto) : ResponseEntity<BaseResponse<Contract.Companion.ContractDto?>> {
-        val response = contractService!!.getContractsByEventDto(request)
+        val response = contractService!!.getContractsByEventDto(request)?.getContractDto()
         return ResponseEntity.ok(success(response, messageService!!.get("contract.fetch.success")))
     }
 }
